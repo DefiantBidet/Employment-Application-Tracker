@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  # website:
+  #   build: ./apps/website
+  #   # image: 985764892725.dkr.ecr.us-east-1.amazonaws.com/website:latest
+  #   environment:
+  #     environment: ${ENVIRONMENT}
+  #   # command: yarn start
+  #   # volumes:
+  #     # - ./apps/website/:/usr/src/app/
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - 5433:5432
+    volumes:
+      - ./apps/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
