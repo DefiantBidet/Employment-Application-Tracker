@@ -13,9 +13,7 @@
         "alias": {
           "Api": "src/ts/api/*",
           "Components": "src/ts/components/*",
-          "Contexts": "src/ts/contexts/*",
-          "Experiments": "src/ts/experiments/*",
-          "Styles": "src/scss/*",
+          "Containers": "src/ts/containers/*",
           "Types": "src/ts/types/*",
           "Utils": "src/ts/utils/*"
         }

@@ -1,119 +1,101 @@
-// import * as uuid from 'uuid';
-
-// import * as FutureAPI from 'Future';
-// import { IExerciseContext } from 'Contexts/ExerciseContext';
+import * as DefiantBidetAPI from 'DefiantBidet';
 
 /**
- * Creates a mock FutureAPI.AudioData object
- * @param  {string} url           url of audio [optional]
- * @return {FutureAPI.AudioData}  Audio Data mock
+ * Generate a random number from min to max - inclusive.
+ * @param  {number} min Minimum bound of Random - inclusive
+ * @param  {number} max Maximum bound of Random - inclusive
+ * @return {number}     Random Number between min and max
  * @function
  */
-// export function createMockAudioData(url?: string): FutureAPI.AudioData {
-//   const mockAudio: FutureAPI.AudioData = {
-//     url: url ?? '//localhost/audio/4\'33".m4a',
-//   };
-//   return mockAudio;
-// }
+function randomNumber(min: number, max: number): number {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  // The maximum is inclusive and the minimum is inclusive
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 /**
- * Creates a mock FutureAPI.VideoData object
- * @param  {Partial<FutureAPI.VideoData>} mockVideoData  Partial Video Data [optional]
- * @return {FutureAPI.VideoData}                         Video Data mock
+ * Generates a mock Company Name string based on random values from
+ * multiple arrays containing generic string data.
+ * @return {string} A Fake Company Name
  * @function
- */
-// export function createMockVideoData(mockVideoData?: Partial<FutureAPI.VideoData>): FutureAPI.VideoData {
-//   const mockVideo: FutureAPI.VideoData = {
-//     isFlipped: mockVideoData?.isFlipped ?? false,
-//     url: mockVideoData?.url ?? '//localhost/video/cats.mp4',
-//   };
+*/
+export function generateMockCompanyName(): string {
+  const randoSet1 = ['Kowalski', 'Fooby', 'Saitama'];
+  const randoSet2 = ['Inc.', 'PLC', 'Ltd.', '& Foo', '& Bar', 'web8'];
 
-//   return mockVideo;
-// }
+  const firstWord = randoSet1[randomNumber(0, randoSet1.length - 1)];
+  const secondWord = randoSet2[randomNumber(0, randoSet2.length - 1)];
+
+  return `${firstWord} ${secondWord}`;
+}
 
 /**
- * Creates a mock FutureAPI.Exercise object
- * @param  {Partial<FutureAPI.Exercise>} mockExerciseData  Partial Exercise Data [optional]
- * @return {FutureAPI.Exercise}                            Exercise Data mock
+ * Generates a mock [FirstName LastName] string
+ * @return {string} A Fake Person Name
  * @function
- */
-// export function createMockExercise(mockExerciseData?: Partial<FutureAPI.Exercise>) {
-//   const mockExercise: FutureAPI.Exercise = {
-//     audio: mockExerciseData?.audio ?? createMockAudioData(),
-//     description: mockExerciseData?.description ?? `mockDescription-${uuid.v4()}`,
-//     equipmentRequired: mockExerciseData?.equipmentRequired ?? null,
-//     id: mockExerciseData?.id ?? uuid.v4(),
-//     isAlternating: mockExerciseData?.isAlternating ?? false,
-//     movementPatterns: mockExerciseData?.movementPatterns ?? `mockMovements-${uuid.v4()}`,
-//     muscleGroups: mockExerciseData?.muscleGroups ?? null,
-//     name: mockExerciseData?.name ?? `mockName-${uuid.v4()}`,
-//     side: mockExerciseData?.side ?? `mockSide-${uuid.v4()}`,
-//     synonyms: mockExerciseData?.synonyms ?? `mockSynonyms-${uuid.v4()}`,
-//     video: mockExerciseData?.video ?? createMockVideoData(),
-//   };
+*/
+export function generateMockContactName() {
+  const firstNames = ['Anon', 'Fooby', 'Test'];
+  const LastNames = ['Smith', 'McBar-Baz', 'Jones'];
 
-//   return mockExercise;
-// }
+  const firstName = firstNames[randomNumber(0, firstNames.length - 1)];
+  const LastName = LastNames[randomNumber(0, LastNames.length - 1)];
+
+  return `${firstName} ${LastName}`;
+}
 
 /**
- * Creates an Array of Mock Exercises
- * @param  {number} length          Length of Array to create
- * @return {FutureAPI.Exercise[]}   Exercise List mock
+ * Creates a mock DefiantBidetAPI.Company Object
+ * @param  {Partial<DefiantBidetAPI.Company>} mockCompanyData Partial Company Data [optional]
+ * @return {DefiantBidetAPI.Company}                          Mock Company Data
  * @function
- */
-// export function createMockExerciseList(length: number): FutureAPI.Exercise[] {
-//   return Array.from({ length }, (_) => createMockExercise());
-// }
+*/
+export function createMockCompany(mockCompanyData?: Partial<DefiantBidetAPI.Company>): DefiantBidetAPI.Company {
+  const mockCompany: DefiantBidetAPI.Company = {
+    id: mockCompanyData?.id ?? randomNumber(0, 100),
+    name: mockCompanyData?.name ?? generateMockCompanyName(),
+    notes: mockCompanyData?.notes ?? '',
+  };
+
+  return mockCompany;
+}
 
 /**
- * Creates a mock PredictionSkillLevel object
- * @param  {Partial<FutureAPI.PredictionSkillLevel>} mockPredictionSkillLevel  Partial PredictionSkillLevel data [optional]
- * @return {FutureAPI.PredictionSkillLevel}                                    Prediction Skill Level mock
+ * Creates a mock DefiantBidetAPI.Contact Object
+ * @param  {Partial<DefiantBidetAPI.Contact>} mockContactData Partial Contact Data [optional]
+ * @return {DefiantBidetAPI.Contact}                          Mock Contact Data
  * @function
- */
-// export function createMockPredictionSkillLevel(mockPredictionSkillLevel?: Partial<FutureAPI.PredictionSkillLevel>): FutureAPI.PredictionSkillLevel {
-//   const mockSkillLevel: FutureAPI.PredictionSkillLevel = {
-//     level: mockPredictionSkillLevel?.level ?? 3,
-//     maxLevel: mockPredictionSkillLevel?.level ?? 5,
-//     predictionConfidence: Math.random(),
-//   };
+*/
+export function createMockContact(mockContactData?: Partial<DefiantBidetAPI.Contact>) {
+  const mockContact: DefiantBidetAPI.Contact = {
+    id: mockContactData?.id ?? randomNumber(0, 100),
+    company_id: mockContactData?.company_id ?? randomNumber(0, 100),
+    name: mockContactData?.name ?? generateMockContactName(),
+    email: mockContactData?.email ?? 'test@test.com',
+    notes: mockContactData?.notes ?? '',
+  };
 
-//   return mockSkillLevel;
-// }
+  return mockContact;
+}
 
 /**
- * Creates a mock ExercisePrediction object
- * @param  {Partial<FutureAPI.ExercisePrediction>} mockExercisePrediction  Partial ExercisePrediction data [optional]
- * @return {FutureAPI.ExercisePrediction}                                  Exercise Prediction mock
+ * Creates  a mock DefiantBidetAPI.Application Object
+ * @param  {Partial<DefiantBidetAPI.Application>} mockApplicationData Partial Application Data [optional]
+ * @return {DefiantBidetAPI.Application}                              Mock Application Data
  * @function
- */
-// export function createMockExercisePrediction(mockExercisePrediction?: Partial<FutureAPI.ExercisePrediction>): FutureAPI.ExercisePrediction {
-//   const mockPrediction: FutureAPI.ExercisePrediction = {
-//     exerciseId: mockExercisePrediction?.exerciseId ?? uuid.v4(),
-//     predictedAt: new Date().toISOString(),
-//     skillLevel: mockExercisePrediction?.skillLevel ?? createMockPredictionSkillLevel(),
-//     predictionTimeCostMilliseconds: mockExercisePrediction?.predictionTimeCostMilliseconds ?? (250 + Math.random()),
-//   };
+*/
+export function createMockApplication(mockApplicationData?: Partial<DefiantBidetAPI.Application>) {
+  const mockApplication: DefiantBidetAPI.Application = {
+    id: mockApplicationData?.id ?? randomNumber(0, 100),
+    company_id: mockApplicationData?.company_id ?? randomNumber(0, 100),
+    role: mockApplicationData?.role ?? 'Chief Foo Officer',
+    status: mockApplicationData?.status ?? DefiantBidetAPI.ApplicationStatus.APPLIED,
+    salary: mockApplicationData?.salary ?? 200000.00,
+    applied_date: mockApplicationData?.applied_date ?? new Date().toISOString().slice(0, 10),
+    notes: mockApplicationData?.notes ?? '',
+    red_flag: mockApplicationData?.red_flag ?? false,
+  };
 
-//   return mockPrediction;
-// }
-
-/**
- * Creates a mock IExerciseContext object
- * @param  {Partial<IExerciseContext>} mockExerciseContext  Partial IExerciseContext data [optional]
- * @return {IExerciseContext}                               Exercise Context mock
- * @function
- */
-// export function createMockExerciseContext(mockExerciseContext?: Partial<IExerciseContext>): IExerciseContext {
-//   const noop = () => { /* noop */ };
-
-//   const mockContext: IExerciseContext = {
-//     exerciseList: mockExerciseContext?.exerciseList ?? [],
-//     setExerciseList: mockExerciseContext?.setExerciseList ?? noop,
-//     selectedExercise: mockExerciseContext?.selectedExercise ?? null,
-//     setSelectedExercise: mockExerciseContext?.setSelectedExercise ?? noop,
-//   };
-
-//   return mockContext;
-// };
-
+  return mockApplication;
+}

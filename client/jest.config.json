@@ -4,9 +4,7 @@
     "^.*.(css|scss)$": "identity-obj-proxy",
     "^Api/(.*)$": "<rootDir>src/ts/api/$1",
     "^Components/(.*)$": "<rootDir>src/ts/components/$1",
-    "^Contexts/(.*)$": "<rootDir>src/ts/contexts/$1",
-    "^Experiments/(.*)$": "<rootDir>src/ts/experiments/$1",
-    "^Styles/(.*)$": "<rootDir>src/scss/$1",
+    "^Containers/(.*)$": "<rootDir>src/ts/contexts/$1",
     "^Utils/(.*)$": "<rootDir>src/ts/utils/$1",
     "^Types/(.*)$": "<rootDir>src/ts/types/$1"
   },
