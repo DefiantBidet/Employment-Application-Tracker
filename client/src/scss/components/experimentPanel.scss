@@ -1,0 +1,51 @@
+@import '../animations';
+@import '../variables';
+
+.experimentPanelContainer {
+  align-items: center;
+  background-color: $medium-grey;
+  border-radius: $corner-radius;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 1rem;
+  padding: 1rem 2rem;
+  position: absolute;
+  top: 35vh;
+  width: 12.5rem;
+  z-index: 2;
+
+  & h1 {
+    font-size: 1rem;
+  }
+}
+
+// .filterContainer {
+//   display: flex;
+// }
+
+.listContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.slideIntoView {
+  animation-duration: 1.25s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-name: slideIn;
+}
+
+.slideOffView {
+  animation-duration: 0.75s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-name: slideOut;
+}

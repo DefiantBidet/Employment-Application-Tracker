@@ -1,0 +1,25 @@
+{
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+  "moduleNameMapper": {
+    "^.*.(css|scss)$": "identity-obj-proxy",
+    "^Api/(.*)$": "<rootDir>src/ts/api/$1",
+    "^Components/(.*)$": "<rootDir>src/ts/components/$1",
+    "^Contexts/(.*)$": "<rootDir>src/ts/contexts/$1",
+    "^Experiments/(.*)$": "<rootDir>src/ts/experiments/$1",
+    "^Styles/(.*)$": "<rootDir>src/scss/$1",
+    "^Utils/(.*)$": "<rootDir>src/ts/utils/$1",
+    "^Types/(.*)$": "<rootDir>src/ts/types/$1"
+  },
+  "roots": ["<rootDir>"],
+  "setupFilesAfterEnv": [
+    "@testing-library/jest-dom",
+    "@testing-library/jest-dom/extend-expect",
+    "@testing-library/user-event",
+    "<rootDir>src/ts/test/jest-setup.ts"
+  ],
+  "testEnvironment": "jsdom",
+  "testRegex": "\\.spec\\.tsx",
+  "transform": {
+    "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
+  }
+}

@@ -22,24 +22,24 @@ RETURNS TRIGGER AS $status_history$
         IF (TG_OP = 'UPDATE') THEN
             INSERT INTO status_history(
               applicationId,
-              companyId,
+              company_id,
               status
             )
             VALUES(
               NEW.id,
-              NEW.companyId,
+              NEW.company_id,
               NEW.status
             );
             RETURN NEW;
         ELSIF (TG_OP = 'INSERT') THEN
             INSERT INTO status_history(
               applicationId,
-              companyId,
+              company_id,
               status
             )
             VALUES(
               NEW.id,
-              NEW.companyId,
+              NEW.company_id,
               NEW.status
             );
             RETURN NEW;
@@ -53,10 +53,40 @@ CREATE TYPE APPLICATION_STATUS AS ENUM ('Applied', 'Ghosted', 'Interviewing', 'D
 
 -- Tables
 
+-- company
+CREATE TABLE IF NOT EXISTS company(
+  id SERIAL primary key NOT NULL,
+  name text NOT NULL,
+  notes text NOT NULL,
+  created_timestamp timestamp DEFAULT now(),
+  modified_timestamp timestamp DEFAULT now()
+);
+
+CREATE TRIGGER set_timestamp
+  BEFORE UPDATE ON company
+  FOR EACH ROW
+  EXECUTE PROCEDURE trigger_set_timestamp();
+
+-- contact
+CREATE TABLE IF NOT EXISTS contact(
+  id SERIAL primary key NOT NULL,
+  company_id SERIAL NOT NULL REFERENCES company(id),
+  name text NOT NULL,
+  email citext UNIQUE NOT NULL,
+  notes text NOT NULL,
+  created_timestamp timestamp DEFAULT now(),
+  modified_timestamp timestamp DEFAULT now()
+);
+
+CREATE TRIGGER set_timestamp
+  BEFORE UPDATE ON contact
+  FOR EACH ROW
+  EXECUTE PROCEDURE trigger_set_timestamp();
+
 -- application
 CREATE TABLE IF NOT EXISTS employment(
   id SERIAL primary key NOT NULL,
-  companyId REFERENCES company (id)
+  company_id SERIAL NOT NULL REFERENCES company(id),
   role text NOT NULL,
   status APPLICATION_STATUS NOT NULL,
   salary decimal(8,2) NOT NULL,
@@ -77,40 +107,11 @@ CREATE TRIGGER record_status_history
   FOR EACH ROW
   EXECUTE FUNCTION process_status_history();
 
--- company
-CREATE TABLE IF NOT EXISTS company(
-  id SERIAL primary key NOT NULL,
-  name text NOT NULL,
-  notes text NOT NULL,
-  created_timestamp timestamp DEFAULT now(),
-  modified_timestamp timestamp DEFAULT now()
-);
-
-CREATE TRIGGER set_timestamp
-  BEFORE UPDATE ON company
-  FOR EACH ROW
-  EXECUTE PROCEDURE trigger_set_timestamp();
-
--- contact
-CREATE TABLE IF NOT EXISTS contact(
-  id SERIAL primary key NOT NULL,
-  companyId REFERENCES company (id)
-  name text NOT NULL,
-  email citext UNIQUE NOT NULL,
-  notes text NOT NULL,
-  created_timestamp timestamp DEFAULT now(),
-  modified_timestamp timestamp DEFAULT now()
-);
-
-CREATE TRIGGER set_timestamp
-  BEFORE UPDATE ON contact
-  FOR EACH ROW
-  EXECUTE PROCEDURE trigger_set_timestamp();
-
 -- status history
 CREATE TABLE IF NOT EXISTS status_history(
-  applicationId REFERENCES employment(id)
-  companyId REFERENCES company (id)
+  id SERIAL primary key NOT NULL,
+  application_id SERIAL NOT NULL REFERENCES employment(id),
+  company_id SERIAL NOT NULL REFERENCES company(id),
   status APPLICATION_STATUS NOT NULL,
   created_timestamp timestamp DEFAULT now()
 );

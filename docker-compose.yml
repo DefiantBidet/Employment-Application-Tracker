@@ -1,14 +1,11 @@
 version: '3'
 
 services:
-  # website:
-  #   build: ./apps/website
-  #   # image: 985764892725.dkr.ecr.us-east-1.amazonaws.com/website:latest
-  #   environment:
-  #     environment: ${ENVIRONMENT}
-  #   # command: yarn start
-  #   # volumes:
-  #     # - ./apps/website/:/usr/src/app/
+  # client:
+    # TODO
+
+  # server:
+    # TODO
 
   db:
     image: postgres:latest
@@ -17,4 +14,14 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - ./apps/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+# template from another app:
+  # website:
+  #   build: ./apps/website
+  #   # image: 985764892725.dkr.ecr.us-east-1.amazonaws.com/website:latest
+  #   environment:
+  #     environment: ${ENVIRONMENT}
+  #   # command: yarn start
+  #   # volumes:
+  #     # - ./apps/website/:/usr/src/app/

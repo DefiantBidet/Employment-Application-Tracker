@@ -1,0 +1,31 @@
+@import 'colors';
+
+$base-font: 'Source Code Pro', monospace, sans-serif !default;
+
+$corner-radius: 0.5rem;
+
+.baseFont {
+  font-family: $base_font;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+}
+
+.boldFont {
+  @extend .baseFont;
+  font-weight: 700;
+}
+
+.lightFont {
+  @extend .baseFont;
+  font-weight: 200;
+}
+
+.base-container {
+  @extend .baseFont;
+
+  display: flex;
+  color: $off-black;
+  margin: 0;
+  padding: 0;
+}

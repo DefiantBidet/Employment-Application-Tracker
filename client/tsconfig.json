@@ -1,0 +1,77 @@
+
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "baseUrl": ".",
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "noEmit": false,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/ts/*",
+      ],
+      "Api/*": [
+        "src/ts/api/*",
+      ],
+      "Components/*": [
+        "src/ts/components/*",
+      ],
+      "Contexts/*": [
+        "src/ts/contexts/*",
+      ],
+      "Experiments/*": [
+        "src/ts/experiments/*",
+      ],
+      "Styles/*": [
+        "src/scss/*",
+      ],
+      "Types/*": [
+        "src/ts/types/*",
+      ],
+      "Utils/*": [
+        "src/ts/utils/*",
+      ]
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2020",
+    "typeRoots": [
+      "./node_modules/@types",
+      "src/ts/**/*.d.ts"
+    ]
+  },
+  "include": [
+    "src/ts/**/*.ts",
+    "src/ts/**/*.tsx",
+    "src/scss/**/*.scss"
+  ],
+  "exclude": [
+    "src/ts/**/*.spec.ts",
+  ]
+}

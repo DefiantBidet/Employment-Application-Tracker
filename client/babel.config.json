@@ -1,0 +1,25 @@
+{
+  "presets": [
+    "@babel/env",
+    "@babel/react",
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-class-properties"],
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "Api": "src/ts/api/*",
+          "Components": "src/ts/components/*",
+          "Contexts": "src/ts/contexts/*",
+          "Experiments": "src/ts/experiments/*",
+          "Styles": "src/scss/*",
+          "Types": "src/ts/types/*",
+          "Utils": "src/ts/utils/*"
+        }
+      }
+    ]
+  ]
+}
