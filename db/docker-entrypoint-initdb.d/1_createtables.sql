@@ -21,7 +21,7 @@ RETURNS TRIGGER AS $status_history$
         --
         IF (TG_OP = 'UPDATE') THEN
             INSERT INTO status_history(
-              applicationId,
+              application_id,
               company_id,
               status
             )
@@ -33,7 +33,7 @@ RETURNS TRIGGER AS $status_history$
             RETURN NEW;
         ELSIF (TG_OP = 'INSERT') THEN
             INSERT INTO status_history(
-              applicationId,
+              application_id,
               company_id,
               status
             )
@@ -57,9 +57,9 @@ CREATE TYPE APPLICATION_STATUS AS ENUM ('Applied', 'Ghosted', 'Interviewing', 'D
 CREATE TABLE IF NOT EXISTS company(
   id SERIAL primary key NOT NULL,
   name text NOT NULL,
-  notes text NOT NULL,
-  created_timestamp timestamp DEFAULT now(),
-  modified_timestamp timestamp DEFAULT now()
+  notes text,
+  created_timestamp timestamp DEFAULT NOW(),
+  modified_timestamp timestamp DEFAULT NOW()
 );
 
 CREATE TRIGGER set_timestamp
@@ -73,9 +73,9 @@ CREATE TABLE IF NOT EXISTS contact(
   company_id SERIAL NOT NULL REFERENCES company(id),
   name text NOT NULL,
   email citext UNIQUE NOT NULL,
-  notes text NOT NULL,
-  created_timestamp timestamp DEFAULT now(),
-  modified_timestamp timestamp DEFAULT now()
+  notes text,
+  created_timestamp timestamp DEFAULT NOW(),
+  modified_timestamp timestamp DEFAULT NOW()
 );
 
 CREATE TRIGGER set_timestamp
@@ -90,11 +90,11 @@ CREATE TABLE IF NOT EXISTS employment(
   role text NOT NULL,
   status APPLICATION_STATUS NOT NULL,
   salary decimal(8,2) NOT NULL,
-  applied_date timestamp DEFAULT now(),
-  notes text NOT NULL,
+  applied_date text DEFAULT TO_CHAR(NOW()::date,'YYYY-MM-DD'),
+  notes text,
   red_flag boolean DEFAULT false NOT NULL,
-  created_timestamp timestamp DEFAULT now(),
-  modified_timestamp timestamp DEFAULT now()
+  created_timestamp timestamp DEFAULT NOW(),
+  modified_timestamp timestamp DEFAULT NOW()
 );
 
 CREATE TRIGGER set_timestamp
@@ -110,8 +110,8 @@ CREATE TRIGGER record_status_history
 -- status history
 CREATE TABLE IF NOT EXISTS status_history(
   id SERIAL primary key NOT NULL,
-  application_id SERIAL NOT NULL REFERENCES employment(id),
-  company_id SERIAL NOT NULL REFERENCES company(id),
+  application_id SERIAL NOT NULL,
+  company_id SERIAL NOT NULL,
   status APPLICATION_STATUS NOT NULL,
-  created_timestamp timestamp DEFAULT now()
+  created_timestamp timestamp DEFAULT NOW()
 );

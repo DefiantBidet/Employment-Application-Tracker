@@ -24,7 +24,14 @@ logs
 
 # coverage reports
 .nyc_output
+coverage.*
 coverage/*
+
 
 #npm jank
 .npmrc
+
+
+# db data
+db/data
+db/data/*

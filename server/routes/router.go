@@ -24,6 +24,12 @@ func SetupRouter() *gin.Engine {
 				"version": "v1",
 			})
 		})
+
+		api.GET("", func(context *gin.Context) {
+			context.JSON(http.StatusOK, gin.H{
+				"version": "v1",
+			})
+		})
 	}
 
 	addApplicationRoutes(api)

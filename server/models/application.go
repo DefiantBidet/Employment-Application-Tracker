@@ -5,6 +5,16 @@ import (
 	"fmt"
 )
 
+type ApplicationStatus string
+
+const (
+	Applied      ApplicationStatus = "Applied"
+	Ghosted      ApplicationStatus = "Ghosted"
+	Interviewing ApplicationStatus = "Interviewing"
+	Denied       ApplicationStatus = "Denied"
+	Approved     ApplicationStatus = "Approved"
+)
+
 type Application struct {
 	ID          uint    `json:"id" gorm:"primaryKey"`
 	CompanyID   uint    `json:"company_id"`

@@ -9,15 +9,20 @@ import (
 func addApplicationRoutes(routerGroup *gin.RouterGroup) {
 	application := routerGroup.Group("/application")
 
+	application.GET("", controllers.GetAllApplicationsController)
 	application.GET("/", controllers.GetAllApplicationsController)
 
+	application.POST("", controllers.CreateApplicationController)
 	application.POST("/", controllers.CreateApplicationController)
 
 	application.GET("/:id", controllers.GetApplicationController)
+	application.GET("/:id/", controllers.GetApplicationController)
 
 	application.PUT("/:id", controllers.UpdateApplicationController)
+	application.PUT("/:id/", controllers.UpdateApplicationController)
 
 	application.DELETE("/:id", controllers.DeleteApplicationController)
+	application.DELETE("/:id/", controllers.DeleteApplicationController)
 }
 
 // r := gin.Default()
