@@ -83,6 +83,6 @@ func DeleteCompanyController(context *gin.Context) {
 	if err != nil {
 		context.AbortWithStatus(http.StatusNotFound)
 	} else {
-		context.JSON(http.StatusOK, gin.H{"id:" + id: "deleted"})
+		context.JSON(http.StatusOK, gin.H{"deletedId": id})
 	}
 }

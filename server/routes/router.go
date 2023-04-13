@@ -8,6 +8,8 @@ import (
 )
 
 func SetupRouter() *gin.Engine {
+	const API_VERSION = "v1"
+
 	var router = gin.Default()
 	router.SetTrustedProxies(nil)
 
@@ -21,13 +23,13 @@ func SetupRouter() *gin.Engine {
 	{
 		api.GET("/", func(context *gin.Context) {
 			context.JSON(http.StatusOK, gin.H{
-				"version": "v1",
+				"version": API_VERSION,
 			})
 		})
 
 		api.GET("", func(context *gin.Context) {
 			context.JSON(http.StatusOK, gin.H{
-				"version": "v1",
+				"version": API_VERSION,
 			})
 		})
 	}

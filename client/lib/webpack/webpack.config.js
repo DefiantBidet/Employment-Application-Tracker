@@ -15,6 +15,13 @@ const webpackDevConfig = {
     static: {
       directory: serverDist,
     },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8888',
+        router: () => 'http://localhost:3030',
+        logLevel: 'debug' /*optional*/
+      }
+    }
   },
   entry: './src/ts/index.tsx',
   output: {

@@ -4,18 +4,41 @@ services:
   # client:
     # TODO
 
-  # server:
-    # TODO
-
   db:
     image: postgres:latest
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: always
     ports:
       - 5433:5432
     volumes:
       - ./db/data/:/var/lib/postgresql/data/
       - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  # TODO
+  api:
+    image: application_tracker_go:v1
+    # build: ./server
+    environment:
+      - ENVIRONMENT=prod
+      - GIN_MODE=release
+      - HOST=${HOST}
+      - PORT=${PORT}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    expose:
+      - 3030
+    ports:
+      - 3030:3030
+    volumes:
+      - ./server:/app
+    depends_on:
+      - db
+    links:
+      - db
 
 # template from another app:
   # website:

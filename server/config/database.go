@@ -31,18 +31,26 @@ type PostgresConfig struct {
  * returns a PostgresConfig pointer
  */
 func BuildPostgresConfig() *PostgresConfig {
+	var pgHost string = "db"
 	var pgPort int = 5432
 
-	portString := os.Getenv("POSTGRES_PORT")
-	if portString != "" {
-		integerValue, err := strconv.Atoi(portString)
-		if err == nil {
-			pgPort = integerValue
+	environment := os.Getenv("ENVIRONMENT")
+	if environment == "dev" {
+		// development env -
+		// connect to postgres via host and exposed port
+		// as opposed to via the docker network
+		pgHost = os.Getenv("POSTGRES_HOST")
+		portString := os.Getenv("POSTGRES_PORT")
+		if portString != "" {
+			integerValue, err := strconv.Atoi(portString)
+			if err == nil {
+				pgPort = integerValue
+			}
 		}
 	}
 
 	databaseConfig := PostgresConfig{
-		Host:     os.Getenv("POSTGRES_HOST"),
+		Host:     pgHost,
 		Port:     pgPort,
 		User:     os.Getenv("POSTGRES_USER"),
 		DBName:   os.Getenv("POSTGRES_DB"),
