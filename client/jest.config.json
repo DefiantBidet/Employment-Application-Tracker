@@ -4,9 +4,11 @@
     "^Api/(.*)$": "<rootDir>src/ts/api/$1",
     "^Components/(.*)$": "<rootDir>src/ts/components/$1",
     "^Containers/(.*)$": "<rootDir>src/ts/contexts/$1",
-    "^Test/(.*)$": "<rootDir>src/ts/test/$1",
-    "^Types/(.*)$": "<rootDir>src/ts/types/$1"
+    "^Test/(.*)$": "<rootDir>src/ts/test/$1"
   },
+  "modulePaths": [
+    "<rootDir>src/ts/"
+  ],
   "roots": ["<rootDir>"],
   "setupFilesAfterEnv": [
     "@testing-library/jest-dom",

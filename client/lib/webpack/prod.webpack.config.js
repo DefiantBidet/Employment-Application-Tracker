@@ -3,13 +3,15 @@ const envVars = require('dotenv').config();
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const serverDist = path.resolve(process.cwd(), 'dist');
+
 const webpackConfig = {
   mode: 'production',
   watch: false,
   entry: './src/ts/index.tsx',
   output: {
     filename: 'app-[name]-[chunkhash].js',
-    path: path.resolve(process.cwd(), 'dist'),
+    path: serverDist,
     publicPath: '/',
     clean: true,
   },
@@ -21,7 +23,6 @@ const webpackConfig = {
       'Api': path.resolve(process.cwd(), 'src/ts/api'),
       'Components': path.resolve(process.cwd(), 'src/ts/components'),
       'Containers': path.resolve(process.cwd(), 'src/ts/containers'),
-      'Types': path.resolve(process.cwd(), 'src/ts/types'),
       'Test': path.resolve(process.cwd(), 'src/ts/test'),
     },
   },

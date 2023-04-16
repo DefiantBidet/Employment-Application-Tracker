@@ -1,5 +1,5 @@
 declare module 'DefiantBidet' {
-  export enum ApplicationStatus {
+  export const enum ApplicationStatus {
     APPLIED = 'Applied',
     GHOSTED = 'Ghosted',
     INTERVIEWING = 'Interviewing',
@@ -32,5 +32,12 @@ declare module 'DefiantBidet' {
     applied_date: string;
     notes: string;
     red_flag: boolean;
+  }
+
+  export interface NavLink {
+    name: string;
+    href: string;
+    label: string;
+    key: string;
   }
 }

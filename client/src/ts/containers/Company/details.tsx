@@ -128,7 +128,12 @@ export default function CompanyDetailsContainer(): JSX.Element {
   )
 
   return (
-    <Box fill align="center" justify="center">
+    <Box
+      fill
+      align="center"
+      id="company-details-container"
+      justify="center"
+    >
       {uiState === UI_STATE.EDIT && renderEditDisplay()}
       {uiState === UI_STATE.DISPLAY && renderInfoDisplay()}
       {isLoading && renderLoadingDisplay()}

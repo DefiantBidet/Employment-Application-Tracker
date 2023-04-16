@@ -38,7 +38,6 @@ const webpackDevConfig = {
       'Api': path.resolve(process.cwd(), 'src/ts/api'),
       'Components': path.resolve(process.cwd(), 'src/ts/components'),
       'Containers': path.resolve(process.cwd(), 'src/ts/containers'),
-      'Types': path.resolve(process.cwd(), 'src/ts/types'),
       'Test': path.resolve(process.cwd(), 'src/ts/test'),
     },
   },

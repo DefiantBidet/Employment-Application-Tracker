@@ -37,7 +37,11 @@ export default function CompanyContainer(): JSX.Element {
 
     return (
       <li key={key}>
-        <Anchor href={`/company/${company.id}`} label={company.name} />
+        <Anchor
+          id={`company-list-link-${company.id}`}
+          href={`/company/${company.id}`}
+          label={company.name}
+        />
       </li>
     );
   }
@@ -46,6 +50,7 @@ export default function CompanyContainer(): JSX.Element {
     return (
       <>
         <ul
+          id="company-list"
           style={{
             listStyle: 'none'
           }}
@@ -63,7 +68,13 @@ export default function CompanyContainer(): JSX.Element {
   )
 
   return (
-    <Box fill align="center" justify="center" direction="column">
+    <Box
+      fill
+      align="center"
+      direction="column"
+      id="company-list-container"
+      justify="center"
+    >
       {companyList && renderCompaniesList()}
       {isLoading && renderLoadingDisplay()}
     </Box>

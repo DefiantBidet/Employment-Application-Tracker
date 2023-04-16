@@ -14,7 +14,6 @@
           "Api": "src/ts/api/*",
           "Components": "src/ts/components/*",
           "Containers": "src/ts/containers/*",
-          "Types": "src/ts/types/*",
           "Test": "src/ts/test/*"
         }
       }

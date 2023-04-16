@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "jsx": "react-jsx",
     "lib": [
       "dom",
@@ -17,7 +17,7 @@
     ],
     "module": "esnext",
     "moduleResolution": "node",
-    "outDir": "dist",
+
     "noEmit": false,
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -41,9 +41,6 @@
       "Test/*": [
         "src/ts/test/*",
       ],
-      "Types/*": [
-        "src/ts/types/*",
-      ]
     },
     "resolveJsonModule": true,
     "sourceMap": true,

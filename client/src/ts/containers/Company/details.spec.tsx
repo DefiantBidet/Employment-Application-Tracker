@@ -1,21 +1,18 @@
-import { render, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import { render, waitFor } from '@testing-library/react';
 
 import CompanyDetailsContainer from './details';
-// import { createMockCompany } from 'Test/utils';
 
 describe('<CompanyDetailsContainer />', () => {
 
-  beforeEach(() => {});
-
-  afterEach(() => {
-    jest.clearAllMocks();
+  beforeEach(() => {
+    render(<CompanyDetailsContainer />);
   });
 
-  test('renders a container', () => {
-    render(<CompanyDetailsContainer />);
+  test('Should render a container', () => {
+    waitFor(() => {
+      const element = document.querySelector('div#company-details-container');
+      expect(element).toBeInTheDocument();
+    });
 
-    const element = document.querySelector('div.exerciseContainer');
-    expect(element).toBeInTheDocument();
   });
 });
