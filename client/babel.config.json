@@ -15,7 +15,7 @@
           "Components": "src/ts/components/*",
           "Containers": "src/ts/containers/*",
           "Types": "src/ts/types/*",
-          "Utils": "src/ts/utils/*"
+          "Test": "src/ts/test/*"
         }
       }
     ]

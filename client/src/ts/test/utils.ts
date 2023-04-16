@@ -62,6 +62,16 @@ export function createMockCompany(mockCompanyData?: Partial<DefiantBidetAPI.Comp
 }
 
 /**
+ * Creates an Array of Mock Companies
+ * @param  {number} length              Length of Array to create
+ * @return {DefiantBidetAPI.Company[]}  Company List mock
+ * @function
+ */
+export function createMockCompanyList(length: number): DefiantBidetAPI.Company[] {
+  return Array.from({ length }, (_) => createMockCompany());
+}
+
+/**
  * Creates a mock DefiantBidetAPI.Contact Object
  * @param  {Partial<DefiantBidetAPI.Contact>} mockContactData Partial Contact Data [optional]
  * @return {DefiantBidetAPI.Contact}                          Mock Contact Data
@@ -77,6 +87,16 @@ export function createMockContact(mockContactData?: Partial<DefiantBidetAPI.Cont
   };
 
   return mockContact;
+}
+
+/**
+ * Creates an Array of Mock Contacts
+ * @param  {number} length              Length of Array to create
+ * @return {DefiantBidetAPI.Contact[]}  Contact List mock
+ * @function
+ */
+export function createMockContactList(length: number): DefiantBidetAPI.Contact[] {
+  return Array.from({ length }, (_) => createMockContact());
 }
 
 /**
@@ -98,4 +118,14 @@ export function createMockApplication(mockApplicationData?: Partial<DefiantBidet
   };
 
   return mockApplication;
+}
+
+/**
+ * Creates an Array of Mock Applications
+ * @param  {number} length                  Length of Array to create
+ * @return {DefiantBidetAPI.Application[]}  Application List mock
+ * @function
+ */
+export function createMockApplicationList(length: number): DefiantBidetAPI.Application[] {
+  return Array.from({ length }, (_) => createMockApplication());
 }

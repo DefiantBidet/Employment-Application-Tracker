@@ -38,31 +38,26 @@
       "Containers/*": [
         "src/ts/containers/*",
       ],
+      "Test/*": [
+        "src/ts/test/*",
+      ],
       "Types/*": [
         "src/ts/types/*",
-      ],
-      "Utils/*": [
-        "src/ts/utils/*",
       ]
     },
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules"
-      }
-    ],
     "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
     "target": "es2020",
     "typeRoots": [
       "./node_modules/@types",
+      "src/ts/types/*",
       "src/ts/**/*.d.ts"
     ]
   },
   "include": [
     "src/ts/**/*.ts",
     "src/ts/**/*.tsx",
-    "src/scss/**/*.scss"
   ],
   "exclude": [
     "src/ts/**/*.spec.ts",

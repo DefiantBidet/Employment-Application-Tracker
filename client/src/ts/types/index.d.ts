@@ -1,10 +1,10 @@
 declare module 'DefiantBidet' {
   export enum ApplicationStatus {
-    APPLIED = "Applied",
-    GHOSTED = "Ghosted",
-    INTERVIEWING = "Interviewing",
-    DENIED = "Denied",
-    APPROVED = "Approved",
+    APPLIED = 'Applied',
+    GHOSTED = 'Ghosted',
+    INTERVIEWING = 'Interviewing',
+    DENIED = 'Denied',
+    APPROVED = 'Approved',
   }
 
   export type StatusEnum = keyof typeof ApplicationStatus;

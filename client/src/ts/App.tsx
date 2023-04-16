@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { Grommet } from 'grommet';
+import { Grommet, Nav } from 'grommet';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import applicationTheme from 'theme';
 
-import ApplicationContainer from 'Containers/Applications';
-import ApplicationDetailsContainer from 'Containers/Applications/Details';
-import CompanyContainer from 'Containers/Companies';
-import CompanyDetailsContainer from 'Containers/Companies/Details';
+import ApplicationContainer from 'Containers/Application/index';
+import ApplicationDetailsContainer from 'Containers/Application/details';
+import CompanyContainer from 'Containers/Company/index';
+import CompanyDetailsContainer from 'Containers/Company/details';
 import DataVisualizationContainer from 'Containers/DataVisualization';
 
 const router = createBrowserRouter([
@@ -60,6 +60,14 @@ export default function App(): JSX.Element {
 
   return (
     <Grommet theme={applicationTheme}>
+      <Nav
+        direction="row"
+        background="brand"
+        pad="medium"
+        width="100%"
+      >
+        TODO...
+      </Nav>
       <RouterProvider router={router} />
     </Grommet>
   );

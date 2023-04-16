@@ -22,7 +22,7 @@ const webpackConfig = {
       'Components': path.resolve(process.cwd(), 'src/ts/components'),
       'Containers': path.resolve(process.cwd(), 'src/ts/containers'),
       'Types': path.resolve(process.cwd(), 'src/ts/types'),
-      'Utils': path.resolve(process.cwd(), 'src/ts/utils'),
+      'Test': path.resolve(process.cwd(), 'src/ts/test'),
     },
   },
   module: {

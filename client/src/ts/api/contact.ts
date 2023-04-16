@@ -22,7 +22,6 @@ export const loadContacts = async (): Promise<AxiosResponse<DefiantBidetAPI.Cont
 /**
  * POST - /contact
  * Fetches A Single Contact
- * @param  {string} contactId Id of Contact
  * @return {Promise}          Axios Response Data
  * @async
  * @function
@@ -37,7 +36,7 @@ export const createContact = async (): Promise<AxiosResponse<DefiantBidetAPI.Con
  * @async
  * @function
  */
-export const loadContact = async (): Promise<AxiosResponse<DefiantBidetAPI.Contact, any>> => fetch.get<DefiantBidetAPI.Contact>('');
+export const loadContact = async (contactId: string): Promise<AxiosResponse<DefiantBidetAPI.Contact, any>> => fetch.get<DefiantBidetAPI.Contact>(`/${contactId}`);
 
 
 /**
@@ -48,7 +47,7 @@ export const loadContact = async (): Promise<AxiosResponse<DefiantBidetAPI.Conta
  * @async
  * @function
  */
-export const updateContact = async (): Promise<AxiosResponse<DefiantBidetAPI.Contact, any>> => fetch.get<DefiantBidetAPI.Contact>('');
+export const updateContact = async (contactId: string): Promise<AxiosResponse<DefiantBidetAPI.Contact, any>> => fetch.get<DefiantBidetAPI.Contact>(`/${contactId}`);
 
 /**
  * DELETE - /contact/:contactId
@@ -58,4 +57,4 @@ export const updateContact = async (): Promise<AxiosResponse<DefiantBidetAPI.Con
  * @async
  * @function
  */
-export const deleteContact = async (): Promise<AxiosResponse<Record<string, string>, any>> => fetch.get<Record<string, string>>('');
+export const deleteContact = async (contactId: string): Promise<AxiosResponse<Record<string, string>, any>> => fetch.get<Record<string, string>>(`/${contactId}`);

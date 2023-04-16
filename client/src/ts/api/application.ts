@@ -22,7 +22,6 @@ export const loadApplications = async (): Promise<AxiosResponse<DefiantBidetAPI.
 /**
  * POST - /application
  * Fetches A Single Application
- * @param  {string} applicationId Id of Application
  * @return {Promise}          Axios Response Data
  * @async
  * @function
@@ -37,7 +36,7 @@ export const createApplication = async (): Promise<AxiosResponse<DefiantBidetAPI
  * @async
  * @function
  */
-export const loadApplication = async (): Promise<AxiosResponse<DefiantBidetAPI.Application, any>> => fetch.get<DefiantBidetAPI.Application>('');
+export const loadApplication = async (applicationId: string): Promise<AxiosResponse<DefiantBidetAPI.Application, any>> => fetch.get<DefiantBidetAPI.Application>(`/${applicationId}`);
 
 
 /**
@@ -48,7 +47,7 @@ export const loadApplication = async (): Promise<AxiosResponse<DefiantBidetAPI.A
  * @async
  * @function
  */
-export const updateApplication = async (): Promise<AxiosResponse<DefiantBidetAPI.Application, any>> => fetch.get<DefiantBidetAPI.Application>('');
+export const updateApplication = async (applicationId: string): Promise<AxiosResponse<DefiantBidetAPI.Application, any>> => fetch.get<DefiantBidetAPI.Application>(`/${applicationId}`);
 
 /**
  * DELETE - /application/:applicationId
@@ -58,4 +57,4 @@ export const updateApplication = async (): Promise<AxiosResponse<DefiantBidetAPI
  * @async
  * @function
  */
-export const deleteApplication = async (): Promise<AxiosResponse<Record<string, string>, any>> => fetch.get<Record<string, string>>('');
+export const deleteApplication = async (applicationId: string): Promise<AxiosResponse<Record<string, string>, any>> => fetch.get<Record<string, string>>(`/${applicationId}`);

@@ -22,7 +22,6 @@ export const loadCompanies = async (): Promise<AxiosResponse<DefiantBidetAPI.Com
 /**
  * POST - /company
  * Fetches A Single Company
- * @param  {string} companyId Id of Company
  * @return {Promise}          Axios Response Data
  * @async
  * @function
@@ -37,7 +36,7 @@ export const createCompany = async (): Promise<AxiosResponse<DefiantBidetAPI.Com
  * @async
  * @function
  */
-export const loadCompany = async (): Promise<AxiosResponse<DefiantBidetAPI.Company, any>> => fetch.get<DefiantBidetAPI.Company>('');
+export const loadCompany = async (companyId: string): Promise<AxiosResponse<DefiantBidetAPI.Company, any>> => fetch.get<DefiantBidetAPI.Company>(`/${companyId}`);
 
 
 /**
@@ -48,7 +47,7 @@ export const loadCompany = async (): Promise<AxiosResponse<DefiantBidetAPI.Compa
  * @async
  * @function
  */
-export const updateCompany = async (): Promise<AxiosResponse<DefiantBidetAPI.Company, any>> => fetch.get<DefiantBidetAPI.Company>('');
+export const updateCompany = async (companyId: string): Promise<AxiosResponse<DefiantBidetAPI.Company, any>> => fetch.get<DefiantBidetAPI.Company>(`/${companyId}`);
 
 /**
  * DELETE - /company/:companyId
@@ -58,4 +57,4 @@ export const updateCompany = async (): Promise<AxiosResponse<DefiantBidetAPI.Com
  * @async
  * @function
  */
-export const deleteCompany = async (): Promise<AxiosResponse<Record<string, string>, any>> => fetch.get<Record<string, string>>('');
+export const deleteCompany = async (companyId: string): Promise<AxiosResponse<Record<string, string>, any>> => fetch.get<Record<string, string>>(`/${companyId}`);

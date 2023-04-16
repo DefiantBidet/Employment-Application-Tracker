@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Box } from 'grommet';
+import {
+  Anchor,
+  Box,
+  Spinner
+} from 'grommet';
 
 import * as DefiantBidetAPI from 'DefiantBidet';
 import { loadCompanies } from 'Api/company';
+
 
 /**
  * CompanyContainer creates a Company List UI
@@ -27,15 +32,39 @@ export default function CompanyContainer(): JSX.Element {
     fetchCompanies().catch(console.error);
   }, []);
 
-  const renderLoadingDisplay = () => {
-    return(
-      <>Loading...</>
+  const renderCompany = (company: DefiantBidetAPI.Company, index: number): JSX.Element => {
+    const key = `company-${company.id}-row-${index}`;
+
+    return (
+      <li key={key}>
+        <Anchor href={`/company/${company.id}`} label={company.name} />
+      </li>
     );
   }
 
-  return (
+  const renderCompaniesList = (): JSX.Element => {
+    return (
+      <>
+        <ul
+          style={{
+            listStyle: 'none'
+          }}
+        >
+          { companyList?.map(renderCompany) }
+        </ul>
+      </>
+    );
+  }
+
+  const renderLoadingDisplay = () => (
     <Box fill align="center" justify="center">
-      {JSON.stringify(companyList)}
+      <Spinner />
+    </Box>
+  )
+
+  return (
+    <Box fill align="center" justify="center" direction="column">
+      {companyList && renderCompaniesList()}
       {isLoading && renderLoadingDisplay()}
     </Box>
   );
