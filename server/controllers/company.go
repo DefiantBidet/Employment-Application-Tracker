@@ -6,7 +6,21 @@ import (
 	"defiantbidet/job-tracker/models"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gosimple/slug"
 )
+
+func handleCompanySlug(company *models.Company) {
+	var slugString string
+	if company.Slug == "" {
+		slugString = slug.Make(company.Name)
+	} else {
+		slugString = slug.Make(company.Slug)
+	}
+
+	if company.Slug != slugString {
+		company.Slug = slugString
+	}
+}
 
 /**
  * GetAllCompaniesController
@@ -29,6 +43,7 @@ func GetAllCompaniesController(context *gin.Context) {
 func CreateCompanyController(context *gin.Context) {
 	var company models.Company
 	context.BindJSON(&company)
+	handleCompanySlug(&company)
 	err := models.CreateCompany(&company)
 	if err != nil {
 		context.AbortWithStatus(http.StatusNotFound)
@@ -64,6 +79,7 @@ func UpdateCompanyController(context *gin.Context) {
 		context.JSON(http.StatusNotFound, company)
 	}
 	context.BindJSON(&company)
+	handleCompanySlug(&company)
 	err = models.UpdateCompany(&company, id)
 	if err != nil {
 		context.AbortWithStatus(http.StatusNotFound)

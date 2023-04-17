@@ -2,7 +2,7 @@
 
 -- case-insensitive text
 -- used for email addresses
-CREATE EXTENSION citext;
+CREATE EXTENSION CITEXT;
 
 -- Functions
 CREATE OR REPLACE FUNCTION trigger_set_timestamp()
@@ -15,37 +15,34 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION process_status_history()
 RETURNS TRIGGER AS $status_history$
-    BEGIN
-        --
-        -- Create a row in status_history to reflect the status change on employment,
-        --
-        IF (TG_OP = 'UPDATE') THEN
-            INSERT INTO status_history(
-              application_id,
-              company_id,
-              status
-            )
-            VALUES(
-              NEW.id,
-              NEW.company_id,
-              NEW.status
-            );
-            RETURN NEW;
-        ELSIF (TG_OP = 'INSERT') THEN
-            INSERT INTO status_history(
-              application_id,
-              company_id,
-              status
-            )
-            VALUES(
-              NEW.id,
-              NEW.company_id,
-              NEW.status
-            );
-            RETURN NEW;
-        END IF;
-        RETURN NULL; -- result is ignored since this is an AFTER trigger
-    END;
+  BEGIN
+    IF (TG_OP = 'UPDATE') THEN
+      INSERT INTO status_history(
+        application_id,
+        company_id,
+        status
+      )
+      VALUES(
+        NEW.id,
+        NEW.company_id,
+        NEW.status
+      );
+      RETURN NEW;
+    ELSIF (TG_OP = 'INSERT') THEN
+      INSERT INTO status_history(
+        application_id,
+        company_id,
+        status
+      )
+      VALUES(
+        NEW.id,
+        NEW.company_id,
+        NEW.status
+      );
+      RETURN NEW;
+    END IF;
+    RETURN NULL; -- result is ignored since this is an AFTER trigger
+  END;
 $status_history$ LANGUAGE plpgsql;
 
 -- Application Status
@@ -56,8 +53,9 @@ CREATE TYPE APPLICATION_STATUS AS ENUM ('Applied', 'Ghosted', 'Interviewing', 'D
 -- company
 CREATE TABLE IF NOT EXISTS company(
   id SERIAL primary key NOT NULL,
-  name text NOT NULL,
-  notes text,
+  name TEXT NOT NULL,
+  slug TEXT NOT NULL,
+  notes TEXT,
   created_timestamp timestamp DEFAULT NOW(),
   modified_timestamp timestamp DEFAULT NOW()
 );
@@ -71,9 +69,9 @@ CREATE TRIGGER set_timestamp
 CREATE TABLE IF NOT EXISTS contact(
   id SERIAL primary key NOT NULL,
   company_id SERIAL NOT NULL REFERENCES company(id),
-  name text NOT NULL,
-  email citext UNIQUE NOT NULL,
-  notes text,
+  name TEXT NOT NULL,
+  email CITEXT UNIQUE NOT NULL,
+  notes TEXT,
   created_timestamp timestamp DEFAULT NOW(),
   modified_timestamp timestamp DEFAULT NOW()
 );
@@ -87,11 +85,12 @@ CREATE TRIGGER set_timestamp
 CREATE TABLE IF NOT EXISTS employment(
   id SERIAL primary key NOT NULL,
   company_id SERIAL NOT NULL REFERENCES company(id),
-  role text NOT NULL,
+  company_name TEXT NOT NULL,
+  role TEXT NOT NULL,
   status APPLICATION_STATUS NOT NULL,
   salary decimal(8,2) NOT NULL,
-  applied_date text DEFAULT TO_CHAR(NOW()::date,'YYYY-MM-DD'),
-  notes text,
+  applied_date TEXT DEFAULT TO_CHAR(NOW()::date,'YYYY-MM-DD'),
+  notes TEXT,
   red_flag boolean DEFAULT false NOT NULL,
   created_timestamp timestamp DEFAULT NOW(),
   modified_timestamp timestamp DEFAULT NOW()

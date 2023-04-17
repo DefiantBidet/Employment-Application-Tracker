@@ -66,6 +66,7 @@ export default function CompanyDetailsContainer(): JSX.Element {
       >
         <Heading
           a11yTitle="company-name"
+          id="company-name"
           margin="none"
         >
           {companyInfo?.name}
@@ -80,12 +81,14 @@ export default function CompanyDetailsContainer(): JSX.Element {
         <Box
           fill
           align="center"
+          id="company-contact-notes-container"
           justify="center"
           direction="row"
         >
           <Box
             align="center"
             direction="column"
+            id="company-contact-container"
             justify="center"
             pad="small"
             width="60%"
@@ -103,6 +106,7 @@ export default function CompanyDetailsContainer(): JSX.Element {
             align="start"
             border={{ color: 'brand', size: 'small' }}
             direction="column"
+            id="company-notes-container"
             height="100%"
             pad="small"
             width="40%"

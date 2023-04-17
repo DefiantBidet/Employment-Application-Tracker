@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 
 	"defiantbidet/job-tracker/models"
 
@@ -29,6 +30,14 @@ func GetAllApplicationsController(context *gin.Context) {
 func CreateApplicationController(context *gin.Context) {
 	var application models.Application
 	context.BindJSON(&application)
+	if application.CompanyName == "" {
+		var company models.Company
+		err := models.GetCompany(&company, strconv.FormatUint(uint64(application.CompanyID), 10))
+		if err != nil {
+			context.AbortWithStatus(http.StatusBadRequest)
+		}
+		application.CompanyName = company.Name
+	}
 	err := models.CreateApplication(&application)
 	if err != nil {
 		context.AbortWithStatus(http.StatusNotFound)

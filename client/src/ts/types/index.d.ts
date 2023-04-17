@@ -13,6 +13,7 @@ declare module 'DefiantBidet' {
     id: number;
     name: string;
     notes: string;
+    slug: string;
   }
 
   export interface Contact {
@@ -26,6 +27,7 @@ declare module 'DefiantBidet' {
   export interface Application {
     id: number;
     company_id: number;
+    company_name: string;
     role: string;
     status: string;
     salary: number;

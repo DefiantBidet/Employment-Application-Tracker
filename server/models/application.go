@@ -8,6 +8,7 @@ import (
 type Application struct {
 	ID          uint    `json:"id" gorm:"primaryKey"`
 	CompanyID   uint    `json:"company_id"`
+	CompanyName string  `json:"company_name"`
 	Role        string  `json:"role"`
 	Status      string  `json:"status"`
 	Salary      float64 `json:"salary"`

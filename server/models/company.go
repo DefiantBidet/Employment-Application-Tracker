@@ -9,6 +9,7 @@ type Company struct {
 	ID    uint   `json:"id" gorm:"primaryKey"`
 	Name  string `json:"name"`
 	Notes string `json:"notes"`
+	Slug  string `json:"slug"`
 }
 
 func (company *Company) TableName() string {
