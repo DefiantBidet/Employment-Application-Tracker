@@ -1,3 +1,5 @@
+# ⚠️ This repo is a Work In Progress ⚠️
+
 # Job Tracker
 
 track employment applications
@@ -95,4 +97,20 @@ go tool cover -html=coverage.out
 
 
 #### Client
- - todo ...
+Run all test files in a single run:
+```bash
+# yarn - call jest for single test run
+yarn test
+
+# npm - call jest for single test run
+npm test
+```
+
+Run all test files, watching for file changes to re-run tests:
+```bash
+# yarn - call jest in watch mode
+yarn test:watch
+
+# npm - call jest in watch mode
+npm run test:watch
+```
