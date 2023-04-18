@@ -25,7 +25,7 @@ describe('<CompanyList />', () => {
   });
 
   test('Should render an anchor link for company in list', () => {
-    const hrefRegex = /^\/company\/\d$/;
+    const hrefRegex = /^\/company\/\d+$/;
     waitFor(() => {
       const linkEl = document.querySelector('a[id^=company-list-link]');
       const links = document.querySelectorAll('a[id^=company-list-link]');

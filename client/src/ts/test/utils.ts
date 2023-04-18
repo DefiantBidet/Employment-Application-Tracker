@@ -1,3 +1,5 @@
+import slugify from 'slugify';
+
 import * as DefiantBidetAPI from 'DefiantBidet';
 
 /**
@@ -52,10 +54,13 @@ export function generateMockContactName() {
  * @function
 */
 export function createMockCompany(mockCompanyData?: Partial<DefiantBidetAPI.Company>): DefiantBidetAPI.Company {
+  const mockCompanyName = mockCompanyData?.name ?? generateMockCompanyName();
+
   const mockCompany: DefiantBidetAPI.Company = {
-    id: mockCompanyData?.id ?? randomNumber(0, 100),
-    name: mockCompanyData?.name ?? generateMockCompanyName(),
+    id: mockCompanyData?.id ?? randomNumber(0, 99),
+    name: mockCompanyName,
     notes: mockCompanyData?.notes ?? '',
+    slug: mockCompanyData?.slug ?? slugify(mockCompanyName)
   };
 
   return mockCompany;
@@ -79,8 +84,8 @@ export function createMockCompanyList(length: number): DefiantBidetAPI.Company[]
 */
 export function createMockContact(mockContactData?: Partial<DefiantBidetAPI.Contact>) {
   const mockContact: DefiantBidetAPI.Contact = {
-    id: mockContactData?.id ?? randomNumber(0, 100),
-    company_id: mockContactData?.company_id ?? randomNumber(0, 100),
+    id: mockContactData?.id ?? randomNumber(0, 99),
+    company_id: mockContactData?.company_id ?? randomNumber(0, 99),
     name: mockContactData?.name ?? generateMockContactName(),
     email: mockContactData?.email ?? 'test@test.com',
     notes: mockContactData?.notes ?? '',
@@ -107,8 +112,9 @@ export function createMockContactList(length: number): DefiantBidetAPI.Contact[]
 */
 export function createMockApplication(mockApplicationData?: Partial<DefiantBidetAPI.Application>) {
   const mockApplication: DefiantBidetAPI.Application = {
-    id: mockApplicationData?.id ?? randomNumber(0, 100),
-    company_id: mockApplicationData?.company_id ?? randomNumber(0, 100),
+    id: mockApplicationData?.id ?? randomNumber(0, 99),
+    company_id: mockApplicationData?.company_id ?? randomNumber(0, 99),
+    company_name: mockApplicationData?.company_name ?? generateMockCompanyName(),
     role: mockApplicationData?.role ?? 'Chief Foo Officer',
     status: mockApplicationData?.status ?? DefiantBidetAPI.ApplicationStatus.APPLIED,
     salary: mockApplicationData?.salary ?? 200000.00,
@@ -127,5 +133,18 @@ export function createMockApplication(mockApplicationData?: Partial<DefiantBidet
  * @function
  */
 export function createMockApplicationList(length: number): DefiantBidetAPI.Application[] {
-  return Array.from({ length }, (_) => createMockApplication());
+  const uniqueIDs = new Set();
+  const recursiveUniqueIdCheck = (): number => {
+    let id = randomNumber(0, 99);
+    if (uniqueIDs.has(id)) {
+      return recursiveUniqueIdCheck();
+    }
+    uniqueIDs.add(id);
+    return id;
+  }
+
+  return Array.from({ length }, (_) => {
+    let id = recursiveUniqueIdCheck();
+    return createMockApplication({ id });
+  });
 }

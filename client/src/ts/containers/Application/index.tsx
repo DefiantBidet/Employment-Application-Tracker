@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import {
   Box,
   ColumnConfig,
@@ -13,8 +15,12 @@ import {
   DataSort,
   DataSummary,
   DataTable,
+  MouseClick,
+  KeyPress,
 } from 'grommet/components';
 import { Toolbar } from 'grommet/components/Toolbar';
+
+import { FlagFill } from 'grommet-icons'
 
 import DefiantBidet from 'DefiantBidet';
 import { loadApplications } from 'Api/application';
@@ -27,6 +33,7 @@ import { loadApplications } from 'Api/application';
 export default function ApplicationContainer(): JSX.Element {
   const [isLoading, setLoading] = useState<boolean>(true);
   const [applicationList, setApplicationList] = useState<DefiantBidet.Application[] | null>(null);
+  let navigate = useNavigate();
 
   // When the component mounts - fetch the applications list
   useEffect(() => {
@@ -42,18 +49,20 @@ export default function ApplicationContainer(): JSX.Element {
     fetchApplications().catch(console.error);
   }, []);
 
+  const onApplicationSelect = (event: MouseClick<DefiantBidet.Application> | KeyPress<DefiantBidet.Application>) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const { datum: applicationData } = event;
+    navigate(`/application/${applicationData.id}`);
+  }
+
   const renderApplicationTable = (): JSX.Element | null => {
     if(!applicationList || applicationList.length == 0) {
       return null;
     }
 
-
     const columnShape: ColumnConfig<DefiantBidet.Application>[] = [
-      {
-        property: 'id',
-        header: 'ID',
-        primary: true
-      },
       {
         property: 'applied_date',
         header: 'Date Applied',
@@ -76,21 +85,35 @@ export default function ApplicationContainer(): JSX.Element {
       },
       {
         property: 'red_flag',
-        header: 'Red Flag',
+        header: '',
+        render: datum => {
+          if (!datum.red_flag) {
+            return null;
+          }
+          return (
+            <FlagFill color="plain" style={{ fill: 'red' }} />
+          );
+        },
       },
     ];
 
     return (
-      <Data data={applicationList}>
-        <Toolbar>
-          <DataSearch />
-          <DataFilters drop>
+      <Data id="application-data-container" data={applicationList}>
+        <Toolbar id="application-data-toolbar">
+          <DataSearch id="application-data-search" />
+          <DataFilters id="application-data-filters" drop>
             <DataFilter property="company_name" />
             <DataSort />
           </DataFilters>
         </Toolbar>
         <Box flex overflow="auto">
-          <DataTable columns={columnShape} />
+          <DataTable
+            id="application-data-table"
+            columns={columnShape}
+            primaryKey="id"
+            onClickRow={onApplicationSelect}
+            sortable={true}
+          />
         </Box>
         <DataSummary />
       </Data>

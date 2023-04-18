@@ -1,10 +1,23 @@
-// import { render, waitFor } from '@testing-library/react';
-// import { act } from 'react-dom/test-utils';
+import { render, waitFor } from '@testing-library/react';
 
-// import Foo from '.';
+import ApplicationDetails from './details';
 
 describe('<ApplicationDetails />', () => {
-  test('todo...', () => {
-    expect(false).toBe(true);
+
+  describe('Display UI', () => {
+    beforeEach(() => {
+      render(<ApplicationDetails />);
+    });
+
+    test('Should render a container', () => {
+      waitFor(() => {
+        const element = document.querySelector('div#application-details-container');
+        expect(element).toBeInTheDocument();
+      });
+    });
   });
+
+  // describe('Edit UI', () => {
+  //   // TODO...
+  // });
 });
