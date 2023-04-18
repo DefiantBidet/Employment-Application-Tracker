@@ -40,6 +40,8 @@ describe('<ApplicationList />', () => {
     expect(element).toBeInTheDocument();
   });
 
+  test.todo('Should make and API call to load Applications');
+
   test('Should render a Data container', async () => {
     await waitFor(() => {
       const element = document.querySelector('#application-data-container');

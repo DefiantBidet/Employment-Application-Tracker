@@ -1,4 +1,4 @@
-import /* React, */ { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   Box,
@@ -8,15 +8,10 @@ import {
   Spinner
 } from 'grommet';
 
-import * as DefiantBidetAPI from 'DefiantBidet';
-
 import { loadCompany } from 'Api/company';
 // import { loadContacts } from 'Api/contact';
 
-enum UI_STATE {
-  EDIT = 'Edit',
-  DISPLAY = 'Display',
-}
+import DefiantBidet from 'DefiantBidet';
 
 /**
  * CompanyDetailsContainer creates a Company Details UI
@@ -25,9 +20,9 @@ enum UI_STATE {
  */
 export default function CompanyDetailsContainer(): JSX.Element {
   const { companyId } = useParams();
-  const [uiState, _ /*setUiState*/] = useState<UI_STATE>(UI_STATE.DISPLAY);
+  const [uiState, _ /*setUiState*/] = useState<DefiantBidet.EDITABLE_UI_STATE>(DefiantBidet.EDITABLE_UI_STATE.DISPLAY);
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [companyInfo, setCompanyInfo] = useState<DefiantBidetAPI.Company | null>(null);
+  const [companyInfo, setCompanyInfo] = useState<DefiantBidet.Company | null>(null);
 
   // When the component mounts - fetch the company details
   useEffect(() => {
@@ -138,8 +133,8 @@ export default function CompanyDetailsContainer(): JSX.Element {
       id="company-details-container"
       justify="center"
     >
-      {uiState === UI_STATE.EDIT && renderEditDisplay()}
-      {uiState === UI_STATE.DISPLAY && renderInfoDisplay()}
+      {uiState === DefiantBidet.EDITABLE_UI_STATE.EDIT && renderEditDisplay()}
+      {uiState === DefiantBidet.EDITABLE_UI_STATE.DISPLAY && renderInfoDisplay()}
       {isLoading && renderLoadingDisplay()}
     </Box>
   );

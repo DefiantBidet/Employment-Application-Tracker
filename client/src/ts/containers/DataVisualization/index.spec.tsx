@@ -4,7 +4,5 @@
 // import Foo from '.';
 
 describe('<DataVisualization />', () => {
-  test('todo...', () => {
-    expect(false).toBe(true);
-  });
+  test.todo('todo...');
 });

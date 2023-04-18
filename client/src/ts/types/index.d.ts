@@ -42,4 +42,11 @@ declare module 'DefiantBidet' {
     label: string;
     key: string;
   }
+
+  export enum EDITABLE_UI_STATE {
+    EDIT = 'Edit',
+    DISPLAY = 'Display',
+  }
+
+  export type EditableUiStateEnum = keyof typeof EDITABLE_UI_STATE;
 }

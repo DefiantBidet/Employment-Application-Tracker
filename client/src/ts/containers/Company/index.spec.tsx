@@ -14,6 +14,8 @@ describe('<CompanyList />', () => {
     });
   });
 
+  test.todo('Should make and API call to load Companies');
+
   test('Should render an unordered list of companies', () => {
     waitFor(() => {
       const listEl = document.querySelector('ul#company-list');

@@ -5,10 +5,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import applicationTheme from 'theme';
 
 import ApplicationContainer from 'Containers/Application/index';
-import ApplicationDetailsContainer from 'Containers/Application/details';
 import CompanyContainer from 'Containers/Company/index';
-import CompanyDetailsContainer from 'Containers/Company/details';
 import DataVisualizationContainer from 'Containers/DataVisualization';
+
+// FIXME: Remove...
+import ApplicationDetailsContainer from 'Containers/Application/details';
+import CompanyDetailsContainer from 'Containers/Company/details';
 
 import NavigationBar from 'Components/NavigationBar/index';
 
@@ -20,6 +22,7 @@ const router = createBrowserRouter([
   {
     path: "application/:applicationId",
     element: <ApplicationDetailsContainer />,
+    // element: <ApplicationContainer />,
   },
   {
     path: "companies",
@@ -28,6 +31,7 @@ const router = createBrowserRouter([
   {
     path: "company/:companyId",
     element: <CompanyDetailsContainer />,
+    // element: <CompanyContainer />,
   },
   {
     path: "visualization",
