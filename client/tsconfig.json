@@ -17,7 +17,6 @@
     ],
     "module": "esnext",
     "moduleResolution": "node",
-
     "noEmit": false,
     "noImplicitAny": true,
     "noImplicitReturns": true,
@@ -41,6 +40,9 @@
       "Test/*": [
         "src/ts/test/*",
       ],
+      "Types/*": [
+        "src/ts/types/*",
+      ],
     },
     "resolveJsonModule": true,
     "sourceMap": true,
@@ -48,8 +50,8 @@
     "target": "es2020",
     "typeRoots": [
       "./node_modules/@types",
-      "src/ts/types/*",
-      "src/ts/**/*.d.ts"
+      "./src/ts/types",
+      "./src/ts/**/*.d.ts"
     ]
   },
   "include": [

@@ -11,7 +11,8 @@ import {
 import { loadCompany } from 'Api/company';
 // import { loadContacts } from 'Api/contact';
 
-import DefiantBidet from 'DefiantBidet';
+import * as API from 'Types/api';
+import * as AppTypes from 'Types/app';
 
 /**
  * CompanyDetailsContainer creates a Company Details UI
@@ -20,9 +21,9 @@ import DefiantBidet from 'DefiantBidet';
  */
 export default function CompanyDetailsContainer(): JSX.Element {
   const { companyId } = useParams();
-  const [uiState, _ /*setUiState*/] = useState<DefiantBidet.EDITABLE_UI_STATE>(DefiantBidet.EDITABLE_UI_STATE.DISPLAY);
+  const [uiState, _ /*setUiState*/] = useState<AppTypes.EDITABLE_UI_STATE>(AppTypes.EDITABLE_UI_STATE.DISPLAY);
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [companyInfo, setCompanyInfo] = useState<DefiantBidet.Company | null>(null);
+  const [companyInfo, setCompanyInfo] = useState<API.Company | null>(null);
 
   // When the component mounts - fetch the company details
   useEffect(() => {
@@ -133,8 +134,8 @@ export default function CompanyDetailsContainer(): JSX.Element {
       id="company-details-container"
       justify="center"
     >
-      {uiState === DefiantBidet.EDITABLE_UI_STATE.EDIT && renderEditDisplay()}
-      {uiState === DefiantBidet.EDITABLE_UI_STATE.DISPLAY && renderInfoDisplay()}
+      {uiState === AppTypes.EDITABLE_UI_STATE.EDIT && renderEditDisplay()}
+      {uiState === AppTypes.EDITABLE_UI_STATE.DISPLAY && renderInfoDisplay()}
       {isLoading && renderLoadingDisplay()}
     </Box>
   );

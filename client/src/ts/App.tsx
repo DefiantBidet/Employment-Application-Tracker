@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Grommet } from 'grommet';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import applicationTheme from 'theme';
+import applicationTheme from './theme';
 
 import ApplicationContainer from 'Containers/Application/index';
 import CompanyContainer from 'Containers/Company/index';

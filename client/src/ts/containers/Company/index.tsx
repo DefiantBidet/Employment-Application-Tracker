@@ -5,7 +5,8 @@ import {
   Spinner
 } from 'grommet';
 
-import * as DefiantBidetAPI from 'DefiantBidet';
+import * as API from 'Types/api';
+
 import { loadCompanies } from 'Api/company';
 
 
@@ -16,7 +17,7 @@ import { loadCompanies } from 'Api/company';
  */
 export default function CompanyContainer(): JSX.Element {
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [companyList, setCompanyList] = useState<DefiantBidetAPI.Company[] | null>(null);
+  const [companyList, setCompanyList] = useState<API.Company[] | null>(null);
 
   // When the component mounts - fetch the company list
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function CompanyContainer(): JSX.Element {
     fetchCompanies().catch(console.error);
   }, []);
 
-  const renderCompany = (company: DefiantBidetAPI.Company, index: number): JSX.Element => {
+  const renderCompany = (company: API.Company, index: number): JSX.Element => {
     const key = `company-${company.id}-row-${index}`;
 
     return (

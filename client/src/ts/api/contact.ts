@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import * as DefiantBidetAPI from 'DefiantBidet';
+import * as API from 'Types/api';
 
 const baseURL = '/api/contact';
 
@@ -17,7 +17,7 @@ const fetch = axios.create({  baseURL: `${baseURL}`, headers: fetchHeaders });
  * @async
  * @function
  */
-export const loadContacts = async (): Promise<AxiosResponse<DefiantBidetAPI.Contact[], any>> => fetch.get<DefiantBidetAPI.Contact[]>('');
+export const loadContacts = async (): Promise<AxiosResponse<API.Contact[], any>> => fetch.get<API.Contact[]>('');
 
 /**
  * POST - /contact
@@ -26,7 +26,7 @@ export const loadContacts = async (): Promise<AxiosResponse<DefiantBidetAPI.Cont
  * @async
  * @function
  */
-export const createContact = async (): Promise<AxiosResponse<DefiantBidetAPI.Contact, any>> => fetch.get<DefiantBidetAPI.Contact>('');
+export const createContact = async (): Promise<AxiosResponse<API.Contact, any>> => fetch.get<API.Contact>('');
 
 /**
  * GET - /contact/:contactId
@@ -36,7 +36,7 @@ export const createContact = async (): Promise<AxiosResponse<DefiantBidetAPI.Con
  * @async
  * @function
  */
-export const loadContact = async (contactId: string): Promise<AxiosResponse<DefiantBidetAPI.Contact, any>> => fetch.get<DefiantBidetAPI.Contact>(`/${contactId}`);
+export const loadContact = async (contactId: string): Promise<AxiosResponse<API.Contact, any>> => fetch.get<API.Contact>(`/${contactId}`);
 
 
 /**
@@ -47,7 +47,7 @@ export const loadContact = async (contactId: string): Promise<AxiosResponse<Defi
  * @async
  * @function
  */
-export const updateContact = async (contactId: string): Promise<AxiosResponse<DefiantBidetAPI.Contact, any>> => fetch.get<DefiantBidetAPI.Contact>(`/${contactId}`);
+export const updateContact = async (contactId: string): Promise<AxiosResponse<API.Contact, any>> => fetch.get<API.Contact>(`/${contactId}`);
 
 /**
  * DELETE - /contact/:contactId

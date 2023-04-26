@@ -68,17 +68,40 @@ go run main.go
 
 Locally, the environment variables will be loaded from the parent directory. In production/Docker the environment variables are supplied via the compose file.
 
-Once changes are finalized build the Docker image:
+Once changes are finalized build the container image:
 ```bash
 # from ./server
+
+# Docker CLI (Moby/dockerd engines)
 docker build -t application_tracker_go:v1 .
+
+# Rancher / nerdctl (containerd engines)
+nerdctl build -t application_tracker_go:v1 .
 ```
 
 ##### Running the image
 
 This isn't common as the docker-compose file handles this, but should you want to run the backend image:
 ```bash
+# Docker CLI (Moby/dockerd engines)
 docker run -i -t -e ENVIRONMENT=development POSTGRES_PORT=0000 POSTGRES_HOST=hostname POSTGRES_USER=username POSTGRES_DB=dbname POSTGRES_PASSWORD=hunter2 application_tracker_go:v1
+
+# Rancher / nerdctl (containerd engines)
+nerdctl run -i -t -e ENVIRONMENT=development POSTGRES_PORT=0000 POSTGRES_HOST=hostname POSTGRES_USER=username POSTGRES_DB=dbname POSTGRES_PASSWORD=hunter2 application_tracker_go:v1
+```
+
+
+### Database
+The database is a local instance of postgres. In the future using a deployed db will be implemented.
+
+```bash
+# from ./db
+
+# Docker CLI (Moby/dockerd engines)
+docker build -t application_tracker_db:v1 .
+
+# Rancher / nerdctl (containerd engines)
+nerdctl build -t application_tracker_db:v1 .
 ```
 
 ### Testing

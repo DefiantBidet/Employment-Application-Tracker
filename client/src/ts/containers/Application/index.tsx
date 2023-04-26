@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -22,7 +22,8 @@ import { Toolbar } from 'grommet/components/Toolbar';
 
 import { FlagFill } from 'grommet-icons'
 
-import DefiantBidet from 'DefiantBidet';
+import * as API from 'Types/api';
+
 import { loadApplications } from 'Api/application';
 
 /**
@@ -32,7 +33,7 @@ import { loadApplications } from 'Api/application';
  */
 export default function ApplicationContainer(): JSX.Element {
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [applicationList, setApplicationList] = useState<DefiantBidet.Application[] | null>(null);
+  const [applicationList, setApplicationList] = useState<API.Application[] | null>(null);
   let navigate = useNavigate();
 
   // When the component mounts - fetch the applications list
@@ -49,7 +50,7 @@ export default function ApplicationContainer(): JSX.Element {
     fetchApplications().catch(console.error);
   }, []);
 
-  const onApplicationSelect = (event: MouseClick<DefiantBidet.Application> | KeyPress<DefiantBidet.Application>) => {
+  const onApplicationSelect = (event: MouseClick<API.Application> | KeyPress<API.Application>) => {
     event.stopPropagation();
     event.preventDefault();
 
@@ -62,7 +63,7 @@ export default function ApplicationContainer(): JSX.Element {
       return null;
     }
 
-    const columnShape: ColumnConfig<DefiantBidet.Application>[] = [
+    const columnShape: ColumnConfig<API.Application>[] = [
       {
         property: 'applied_date',
         header: 'Date Applied',

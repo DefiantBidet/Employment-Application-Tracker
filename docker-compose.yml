@@ -5,15 +5,18 @@ services:
     # TODO
 
   db:
-    image: postgres:latest
+    image: application_tracker_db:v1
+    # image: postgres:latest
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     restart: always
     ports:
       - 5433:5432
     volumes:
-      - ./db/data/:/var/lib/postgresql/data/
-      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - nfs_mount_db_init:/docker-entrypoint-initdb.d
+      - nfs_mount_db_data:/var/lib/postgresql/data
+      # - ./db/data/:/var/lib/postgresql/data/
+      # - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
   # TODO
   api:
@@ -39,6 +42,21 @@ services:
       - db
     links:
       - db
+
+volumes:
+  nfs_mount_db_init:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+      device: ":./db/docker-entrypoint-initdb.d"
+  nfs_mount_db_data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw
+      device: ":./db/data"
+
 
 # template from another app:
   # website:

@@ -17,13 +17,14 @@ const webpackConfig = {
   },
   resolve: {
     roots: [path.resolve(process.cwd(), 'dist')],
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss'],
-    modules: ['src/ts', 'src/scss', 'node_modules'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    modules: ['src/ts', 'node_modules'],
     alias: {
       'Api': path.resolve(process.cwd(), 'src/ts/api'),
       'Components': path.resolve(process.cwd(), 'src/ts/components'),
       'Containers': path.resolve(process.cwd(), 'src/ts/containers'),
       'Test': path.resolve(process.cwd(), 'src/ts/test'),
+      'Types': path.resolve(process.cwd(), 'src/ts/types'),
     },
   },
   module: {

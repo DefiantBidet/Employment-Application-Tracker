@@ -8,8 +8,7 @@ import { Vulnerability } from 'grommet-icons'
 
 import { links } from './links';
 
-import DefiantBidet from 'DefiantBidet';
-
+import * as AppTypes from 'Types/app';
 
 /**
  * NavigationBar creates a Navigation Banner for links to pages of site
@@ -42,7 +41,7 @@ export default function NavigationBar(): JSX.Element {
         id="nav-links-container"
       >
         {
-          links.map((link: DefiantBidet.NavLink) => (
+          links.map((link: AppTypes.NavLink) => (
               <Anchor
                 key={link.key}
                 id={link.name}

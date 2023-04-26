@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import * as DefiantBidetAPI from 'DefiantBidet';
+import * as API from 'Types/api';
 
 const baseURL = '/api/company';
 
@@ -17,7 +17,7 @@ const fetch = axios.create({  baseURL: `${baseURL}`, headers: fetchHeaders });
  * @async
  * @function
  */
-export const loadCompanies = async (): Promise<AxiosResponse<DefiantBidetAPI.Company[], any>> => fetch.get<DefiantBidetAPI.Company[]>('');
+export const loadCompanies = async (): Promise<AxiosResponse<API.Company[], any>> => fetch.get<API.Company[]>('');
 
 /**
  * POST - /company
@@ -26,7 +26,7 @@ export const loadCompanies = async (): Promise<AxiosResponse<DefiantBidetAPI.Com
  * @async
  * @function
  */
-export const createCompany = async (): Promise<AxiosResponse<DefiantBidetAPI.Company, any>> => fetch.get<DefiantBidetAPI.Company>('');
+export const createCompany = async (): Promise<AxiosResponse<API.Company, any>> => fetch.get<API.Company>('');
 
 /**
  * GET - /company/:companyId
@@ -36,7 +36,7 @@ export const createCompany = async (): Promise<AxiosResponse<DefiantBidetAPI.Com
  * @async
  * @function
  */
-export const loadCompany = async (companyId: string): Promise<AxiosResponse<DefiantBidetAPI.Company, any>> => fetch.get<DefiantBidetAPI.Company>(`/${companyId}`);
+export const loadCompany = async (companyId: string): Promise<AxiosResponse<API.Company, any>> => fetch.get<API.Company>(`/${companyId}`);
 
 
 /**
@@ -47,7 +47,7 @@ export const loadCompany = async (companyId: string): Promise<AxiosResponse<Defi
  * @async
  * @function
  */
-export const updateCompany = async (companyId: string): Promise<AxiosResponse<DefiantBidetAPI.Company, any>> => fetch.get<DefiantBidetAPI.Company>(`/${companyId}`);
+export const updateCompany = async (companyId: string): Promise<AxiosResponse<API.Company, any>> => fetch.get<API.Company>(`/${companyId}`);
 
 /**
  * DELETE - /company/:companyId

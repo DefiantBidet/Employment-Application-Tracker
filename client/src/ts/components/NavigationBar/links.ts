@@ -1,6 +1,6 @@
-import DefiantBidet from 'DefiantBidet';
+import * as AppTypes from 'Types/app';
 
-export const links: DefiantBidet.NavLink[] = [
+export const links: AppTypes.NavLink[] = [
   {
     name: 'application-nav-link',
     href: '/',

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import * as DefiantBidetAPI from 'DefiantBidet';
+import * as API from 'Types/api';
 
 const baseURL = '/api/application';
 
@@ -17,7 +17,7 @@ const fetch = axios.create({  baseURL: `${baseURL}`, headers: fetchHeaders });
  * @async
  * @function
  */
-export const loadApplications = async (): Promise<AxiosResponse<DefiantBidetAPI.Application[], any>> => fetch.get<DefiantBidetAPI.Application[]>('');
+export const loadApplications = async (): Promise<AxiosResponse<API.Application[], any>> => fetch.get<API.Application[]>('');
 
 /**
  * POST - /application
@@ -26,7 +26,7 @@ export const loadApplications = async (): Promise<AxiosResponse<DefiantBidetAPI.
  * @async
  * @function
  */
-export const createApplication = async (): Promise<AxiosResponse<DefiantBidetAPI.Application, any>> => fetch.get<DefiantBidetAPI.Application>('');
+export const createApplication = async (): Promise<AxiosResponse<API.Application, any>> => fetch.get<API.Application>('');
 
 /**
  * GET - /application/:applicationId
@@ -36,7 +36,7 @@ export const createApplication = async (): Promise<AxiosResponse<DefiantBidetAPI
  * @async
  * @function
  */
-export const loadApplication = async (applicationId: string): Promise<AxiosResponse<DefiantBidetAPI.Application, any>> => fetch.get<DefiantBidetAPI.Application>(`/${applicationId}`);
+export const loadApplication = async (applicationId: string): Promise<AxiosResponse<API.Application, any>> => fetch.get<API.Application>(`/${applicationId}`);
 
 
 /**
@@ -47,7 +47,7 @@ export const loadApplication = async (applicationId: string): Promise<AxiosRespo
  * @async
  * @function
  */
-export const updateApplication = async (applicationId: string): Promise<AxiosResponse<DefiantBidetAPI.Application, any>> => fetch.get<DefiantBidetAPI.Application>(`/${applicationId}`);
+export const updateApplication = async (applicationId: string): Promise<AxiosResponse<API.Application, any>> => fetch.get<API.Application>(`/${applicationId}`);
 
 /**
  * DELETE - /application/:applicationId

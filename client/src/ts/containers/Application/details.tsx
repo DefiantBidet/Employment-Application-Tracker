@@ -10,7 +10,8 @@ import {
 
 import { loadApplication } from 'Api/application';
 
-import DefiantBidet from 'DefiantBidet';
+import * as API from 'Types/api';
+import * as AppTypes from 'Types/app';
 
 /**
  * ApplicationDetailsContainer creates a Application Details UI
@@ -19,9 +20,9 @@ import DefiantBidet from 'DefiantBidet';
  */
 export default function ApplicationDetailsContainer(): JSX.Element {
   const { applicationId } = useParams();
-  const [uiState, _ /*setUiState*/] = useState<DefiantBidet.EDITABLE_UI_STATE>(DefiantBidet.EDITABLE_UI_STATE.DISPLAY);
+  const [uiState, _ /*setUiState*/] = useState<AppTypes.EDITABLE_UI_STATE>(AppTypes.EDITABLE_UI_STATE.DISPLAY);
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [applicationInfo, setApplicationInfo] = useState<DefiantBidet.Application | null>(null);
+  const [applicationInfo, setApplicationInfo] = useState<API.Application | null>(null);
 
   // When the component mounts - fetch the application details
   useEffect(() => {
@@ -77,8 +78,8 @@ export default function ApplicationDetailsContainer(): JSX.Element {
       id="application-details-container"
       justify="center"
     >
-      {uiState === DefiantBidet.EDITABLE_UI_STATE.EDIT && renderEditDisplay()}
-      {uiState === DefiantBidet.EDITABLE_UI_STATE.DISPLAY && renderInfoDisplay()}
+      {uiState === AppTypes.EDITABLE_UI_STATE.EDIT && renderEditDisplay()}
+      {uiState === AppTypes.EDITABLE_UI_STATE.DISPLAY && renderInfoDisplay()}
       {isLoading && renderLoadingDisplay()}
     </Box>
   );
