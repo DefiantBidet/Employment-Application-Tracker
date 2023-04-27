@@ -17,8 +17,11 @@ const webpackDevConfig = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:8888/',
-        router: () => 'http://localhost:3030',
+        target: `http://${envVars.parsed.HOST}:${envVars.parsed.PORT}`,
+        headers: {
+          Connection: 'keep-alive',
+          Accept: 'application/json',
+        },
         logLevel: 'debug' /*optional*/
       }
     }
@@ -87,7 +90,7 @@ const webpackDevConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-       'process.env': JSON.stringify(process.env)
+       'process.env': JSON.stringify(envVars.parsed)
     }),
     new HtmlWebpackPlugin({
       template: './src/html/index.html',
